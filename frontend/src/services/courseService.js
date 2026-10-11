@@ -1,13 +1,15 @@
-import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/courses";
+import axios from "axios";
+import API_URL from "./api";
+
+const COURSES_URL = `${API_URL}/api/courses`;
 
 export const getCourses = async () => {
-  const response = await axios.get(API_URL);
+  const response = await axios.get(COURSES_URL);
   return response.data.courses;
 };
 
 export const getCourseById = async (id) => {
-  const response = await axios.get(`${API_URL}/${id}`);
+  const response = await axios.get(`${COURSES_URL}/${id}`);
   return response.data;
 };

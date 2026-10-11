@@ -14,8 +14,9 @@ import {
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
+import API_URL from "../services/api";
 
-const API_URL = "http://localhost:5000/api/courses";
+const COURSES_URL = `${API_URL}/api/courses`;
 
 export default function ManageCourses() {
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ export default function ManageCourses() {
 
       const token = localStorage.getItem("token");
 
-      const response = await axios.get(API_URL, {
+      const response = await axios.get(COURSES_URL, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -84,7 +85,7 @@ export default function ManageCourses() {
       const token = localStorage.getItem("token");
 
       await axios.delete(
-        `${API_URL}/${deleteModalCourse._id}`,
+        `${COURSES_URL}/${deleteModalCourse._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -1,18 +1,16 @@
-import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/lessons";
+import axios from "axios";
+import API_URL from "./api";
+
+const LESSONS_URL = `${API_URL}/api/lessons`;
 
 // Create a lesson
 export const createLesson = async (lessonData, token) => {
-  const response = await axios.post(
-    API_URL,
-    lessonData,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const response = await axios.post(LESSONS_URL, lessonData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   return response.data;
 };
@@ -20,7 +18,7 @@ export const createLesson = async (lessonData, token) => {
 // Get all lessons of a course
 export const getCourseLessons = async (courseId, token) => {
   const response = await axios.get(
-    `${API_URL}/course/${courseId}`,
+    `${LESSONS_URL}/course/${courseId}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -33,21 +31,14 @@ export const getCourseLessons = async (courseId, token) => {
 
 // Get single lesson
 export const getLessonById = async (lessonId) => {
-  const response = await axios.get(
-    `${API_URL}/${lessonId}`
-  );
-
+  const response = await axios.get(`${LESSONS_URL}/${lessonId}`);
   return response.data;
 };
 
 // Update lesson
-export const updateLesson = async (
-  lessonId,
-  lessonData,
-  token
-) => {
+export const updateLesson = async (lessonId, lessonData, token) => {
   const response = await axios.put(
-    `${API_URL}/${lessonId}`,
+    `${LESSONS_URL}/${lessonId}`,
     lessonData,
     {
       headers: {
@@ -61,14 +52,11 @@ export const updateLesson = async (
 
 // Delete lesson
 export const deleteLesson = async (lessonId, token) => {
-  const response = await axios.delete(
-    `${API_URL}/${lessonId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const response = await axios.delete(`${LESSONS_URL}/${lessonId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   return response.data;
 };

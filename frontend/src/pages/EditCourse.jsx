@@ -21,6 +21,7 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
+import API_URL from "../services/api";
 
 function EditCourse() {
   const navigate = useNavigate();
@@ -58,7 +59,7 @@ function EditCourse() {
         setLoading(true);
 
         const response = await axios.get(
-          `http://localhost:5000/api/courses/${id}`
+          `${API_URL}/api/courses/${id}`
         );
 
         const course = response.data.course || response.data;
@@ -133,7 +134,7 @@ function EditCourse() {
       }
 
       const response = await axios.put(
-        `http://localhost:5000/api/courses/${id}`,
+        `${API_URL}/api/courses/${id}`,
         {
           title: courseData.title,
           description: courseData.description,

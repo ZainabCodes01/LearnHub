@@ -13,8 +13,8 @@ import {
     GraduationCap,
     Users,
 } from "lucide-react";
+import API_URL from "../services/api";
 
-const API_URL = "http://localhost:5000/api/courses";
 
 const categories = [
     "Web Development",
@@ -184,7 +184,7 @@ export default function AdminCourses() {
                 if (videoUrl && videoUrl.trim()) {
                     try {
                         await axios.post(
-                            "http://localhost:5000/api/lessons",
+                            `${API_URL}/api/lessons`,
                             {
                                 course: newCourse._id,
                                 title: `${newCourse.title} Lecture`,

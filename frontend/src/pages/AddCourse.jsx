@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import API_URL from "../services/api";
 import {
   BookOpen,
   Bell,
@@ -82,7 +83,7 @@ function AddCourse() {
       }
 
       const response = await axios.post(
-        "http://localhost:5000/api/courses",
+        `${API_URL}/api/courses`,
         {
           title: courseData.title,
           description: courseData.description,

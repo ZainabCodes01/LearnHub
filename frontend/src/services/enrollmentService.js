@@ -1,11 +1,13 @@
-import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/enrollments";
+import axios from "axios";
+import API_URL from "./api";
+
+const ENROLLMENTS_URL = `${API_URL}/api/enrollments`;
 
 // Enroll student in a course
 export const enrollCourse = async (courseId, token) => {
   const response = await axios.post(
-    `${API_URL}/enroll`,
+    `${ENROLLMENTS_URL}/enroll`,
     {
       course: courseId,
     },
@@ -21,7 +23,7 @@ export const enrollCourse = async (courseId, token) => {
 
 // Get student's enrolled courses
 export const getMyCourses = async (token) => {
-  const response = await axios.get(`${API_URL}/my-courses`, {
+  const response = await axios.get(`${ENROLLMENTS_URL}/my-courses`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -31,16 +33,10 @@ export const getMyCourses = async (token) => {
 };
 
 // Update course progress
-export const updateProgress = async (
-  enrollmentId,
-  progress,
-  token
-) => {
+export const updateProgress = async (enrollmentId, progress, token) => {
   const response = await axios.put(
-    `${API_URL}/${enrollmentId}/progress`,
-    {
-      progress,
-    },
+    `${ENROLLMENTS_URL}/${enrollmentId}/progress`,
+    { progress },
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -53,7 +49,7 @@ export const updateProgress = async (
 
 export const getInstructorStudents = async (token) => {
   const response = await axios.get(
-    `${API_URL}/instructor-students`,
+    `${ENROLLMENTS_URL}/instructor-students`,
     {
       headers: {
         Authorization: `Bearer ${token}`,

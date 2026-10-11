@@ -1,10 +1,11 @@
 
 import axios from "axios";
+import API_URL from "./api";
 
-const API_URL = "http://localhost:5000/api/users";
+const USERS_URL = `${API_URL}/api/users`;
 
 export const getUsers = async (token) => {
-  const response = await axios.get(API_URL, {
+  const response = await axios.get(USERS_URL, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -14,7 +15,7 @@ export const getUsers = async (token) => {
 };
 
 export const updateUser = async (id, userData, token) => {
-  const response = await axios.put(`${API_URL}/${id}`, userData, {
+  const response = await axios.put(`${USERS_URL}/${id}`, userData, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -24,7 +25,7 @@ export const updateUser = async (id, userData, token) => {
 };
 
 export const deleteUser = async (id, token) => {
-  const response = await axios.delete(`${API_URL}/${id}`, {
+  const response = await axios.delete(`${USERS_URL}/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
