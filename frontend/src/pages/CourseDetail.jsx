@@ -113,7 +113,8 @@ function CourseDetail() {
     });
   };
 
-  const handleEnroll = async () => {
+
+  const handleEnroll = () => {
     if (!isAuthenticated) {
       navigate("/login");
       return;
@@ -124,31 +125,14 @@ function CourseDetail() {
       return;
     }
 
-    try {
-      setEnrolling(true);
-      setError("");
-      setSuccess("");
+    setError("");
+    setSuccess("");
 
-      await enrollCourse(course._id, token);
-
-      setSuccess(
-        "You have successfully enrolled in this course!"
-      );
-
-      setTimeout(() => {
-        navigate("/my-courses");
-      }, 1200);
-    } catch (err) {
-      console.error(err);
-
-      setError(
-        err.response?.data?.message ||
-        "Unable to enroll in this course."
-      );
-    } finally {
-      setEnrolling(false);
-    }
+    navigate("/demo-payment", {
+      state: { course },
+    });
   };
+
 
   const showNotification = (message) => {
     setSuccess(message);

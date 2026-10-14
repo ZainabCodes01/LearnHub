@@ -28,6 +28,8 @@ import EditLesson from "../pages/EditLesson";
 
 import Navbar from "../components/Navbar";
 import InstructorLayout from "../components/InstructorLayout";
+import DemoPayment from "../pages/DemoPayment";
+import OAuthSuccess from "../pages/OAuthSuccess";
 
 function AppRoutes() {
   return (
@@ -48,6 +50,11 @@ function AppRoutes() {
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        <Route
+          path="/oauth-success"
+          element={<OAuthSuccess />}
+        />
 
         {/* PROFILE ROUTE - ALL LOGGED-IN ROLES */}
 
@@ -78,6 +85,15 @@ function AppRoutes() {
           element={
             <ProtectedRoute allowedRoles={["Student"]}>
               <MyCourses />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/demo-payment"
+          element={
+            <ProtectedRoute allowedRoles={["Student"]}>
+              <DemoPayment />
             </ProtectedRoute>
           }
         />

@@ -31,36 +31,36 @@ function Login() {
   };
 
   const handleLogin = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!email || !password) {
-    showToast("Please enter both email and password.");
-    return;
-  }
+    if (!email || !password) {
+      showToast("Please enter both email and password.");
+      return;
+    }
 
-  try {
-    setIsLoading(true);
+    try {
+      setIsLoading(true);
 
-    const data = await loginUser(email, password);
+      const data = await loginUser(email, password);
 
-    console.log("Login response:", data);
+      console.log("Login response:", data);
 
-    login(data.user, data.token);
+      login(data.user, data.token);
 
-    showToast("Login successful! Welcome back.");
+      showToast("Login successful! Welcome back.");
 
-  } catch (error) {
-    console.error("Login error:", error);
+    } catch (error) {
+      console.error("Login error:", error);
 
-    const message =
-      error.response?.data?.message ||
-      "Login failed. Please check your email and password.";
+      const message =
+        error.response?.data?.message ||
+        "Login failed. Please check your email and password.";
 
-    showToast(message);
-  } finally {
-    setIsLoading(false);
-  }
-};
+      showToast(message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="login-page min-vh-100 bg-light">
@@ -80,7 +80,7 @@ function Login() {
 
           {/* LEFT SIDE */}
           <div className="col-lg-6 d-none d-lg-flex login-left-panel text-white flex-column justify-content-between p-5 position-relative overflow-hidden">
-            
+
             <div className="position-relative z-2">
 
               {/* Logo */}
@@ -195,33 +195,35 @@ function Login() {
               {/* Social Login */}
               <div className="row g-3 mb-4">
 
-                <div className="col-6">
-                  <button
-                    type="button"
-                    onClick={() =>
-                      showToast("Google Authentication simulation")
-                    }
-                    className="btn btn-outline-secondary w-100 py-2 d-flex align-items-center justify-content-center gap-2"
-                  >
-                    <span className="fw-bold">G</span>
-                    Google
-                  </button>
-                </div>
+            <div className="col-6">
+              <button
+                type="button"
+                onClick={() => {
+                  window.location.href = "http://localhost:5000/api/auth/google";
+                }}
+                className="btn btn-outline-secondary w-100 py-2 d-flex align-items-center justify-content-center gap-2"
+              >
+                <span className="fw-bold">G</span>
+                Google
+              </button>
+            </div>
 
-                <div className="col-6">
-                  <button
-                    type="button"
-                    onClick={() =>
-                      showToast("GitHub Authentication simulation")
-                    }
-                    className="btn btn-outline-secondary w-100 py-2 d-flex align-items-center justify-content-center gap-2"
-                  >
-                    <span className="fw-bold">GH</span>
-                    GitHub
-                  </button>
-                </div>
+            <div className="col-6">
 
-              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  window.location.href = "http://localhost:5000/api/auth/github";
+                }}
+                className="btn btn-outline-secondary w-100 py-2 d-flex align-items-center justify-content-center gap-2"
+              >
+                <span className="fw-bold">GH</span>
+                GitHub
+              </button>
+
+            </div>
+
+          </div>
 
               {/* Divider */}
               <div className="d-flex align-items-center gap-3 mb-4">
@@ -358,17 +360,13 @@ function Login() {
               <div className="text-center mt-4">
                 <span className="text-secondary">
                   Don't have an account?{""}
+                  <a
+                    href="/register"
+                    className="text-info fw-bold text-decoration-none"
+                  >
+                    Register
+                  </a>
                 </span>
-
-                <button
-                  type="button"
-                  className="btn btn-link text-info fw-bold text-decoration-none p-0"
-                  onClick={() =>
-                    showToast("Redirecting to registration page...")
-                  }
-                >
-                  Register
-                </button>
               </div>
 
             </div>

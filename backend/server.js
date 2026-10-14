@@ -1,7 +1,16 @@
-const lessonRoutes = require("./routes/lessonRoutes");
+
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
+
+dotenv.config();
+
+// Load Passport and Google strategy after environment variables
+const passport = require("passport");
+require("./config/googleStrategy");
+
+require("./config/githubStrategy");
+
 const connectDB = require("./config/db");
 
 // Routes
@@ -9,8 +18,7 @@ const authRoutes = require("./routes/authRoutes");
 const courseRoutes = require("./routes/courseRoutes");
 const enrollmentRoutes = require("./routes/enrollmentRoutes");
 const userRoutes = require("./routes/userRoutes");
-
-dotenv.config();
+const lessonRoutes = require("./routes/lessonRoutes");
 
 const app = express();
 
@@ -20,11 +28,9 @@ connectDB();
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(passport.initialize());
 
-// =========================
-// API ROUTES
-// =========================
-
+// API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/enrollments", enrollmentRoutes);

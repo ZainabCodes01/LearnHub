@@ -19,9 +19,21 @@ const userSchema = new mongoose.Schema(
       ],
     },
 
+    googleId: {
+      type: String,
+      sparse: true,
+    },
+
+    githubId: {
+      type: String,
+      sparse: true,
+    },
+
     password: {
       type: String,
-      required: [true, "Please add a password"],
+      required: function () {
+        return !this.googleId && !this.githubId;
+      },
       minlength: [6, "Password must be at least 6 characters"],
     },
 
